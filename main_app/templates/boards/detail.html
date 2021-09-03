@@ -37,6 +37,7 @@
         <p>Type: {{ board.get_type_display }}</p>
         <p>Color: {{ board.color }}</p>
         <p>Price: ${{ board.price }}</p>
+        <p>Owner: {{ board.user }}</p>
     <p>{{ board.description }}</p>
     <div class="board-actions">
       <a href="{% url 'boards_update' board.id %}" class="btn btn-outline-success">Edit</a>

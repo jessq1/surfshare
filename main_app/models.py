@@ -21,12 +21,18 @@ class Profile(models.Model):
     role = models.CharField(max_length=1,choices=ROLES,default=ROLES[0][0])
     fund = models.FloatField(default='0')
 
+    def __str__(self):
+      return f"{self.get_role_display()}"
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
 
+@receiver(post_save, sender=User) 
+def save_user_profile(sender, instance, **kwargs):
+	instance.profile.save()
 
 class Board(models.Model):
   name = models.CharField(max_length=100)

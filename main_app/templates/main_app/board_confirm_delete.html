@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form-style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-lg py-3">
+<div class="page-header">
+  <h1>Delete Board?</h1>
+  <img src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_1.png' %}" class="img-wrapper" alt="board">
+</div>
+<h2>Are you sure you want to delete {{ object.name }}?</h2>
+
+<form action="" method="POST" class="form">
+  {% csrf_token %}
+  <a 
+    href="{% url 'boards_detail' board.id %}" 
+    class="btn btn-outline-secondary m-2"
+  >
+    Cancel
+  </a>
+  <button type="submit" class="btn btn-outline-danger m-2">Yes - Delete!</button>
+</form>
+</div>
+
+{% endblock %}

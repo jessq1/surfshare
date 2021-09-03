@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from .models import Board, Photo
+from .models import Board, Photo, Profile
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import SignUpForm
+from .forms import SignUpForm, UserForm, ProfileForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 import uuid
 import boto3
 
@@ -65,8 +66,7 @@ class BoardCreate(LoginRequiredMixin, CreateView):
 
 class BoardUpdate(LoginRequiredMixin, UpdateView):
   model = Board
-  # Let's disallow the renaming of a board by excluding the name field!
-  fields = ['origin', 'description', 'age']
+  fields = ['name', 'length', 'description', 'type', 'color', 'price']
 
 class BoardDelete(LoginRequiredMixin, DeleteView):
   model = Board
@@ -89,3 +89,12 @@ def add_photo(request, board_id):
     except Exception as err:
       print('An error occurred uploading file to S3: %s' % err)
   return redirect('boards_detail', board_id=board_id)
+
+
+@login_required
+def profiles_detail(request):
+  user_form = UserForm(instance=request.user)
+  profile_form = ProfileForm(instance=request.user.profile)
+
+  return render(request, 'profiles/detail.html', { 
+    "user":request.user, "user_form":user_form, "profile_form":profile_form })

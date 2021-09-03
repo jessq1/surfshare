@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="{% static 'css/b-detail.css' %}"
+/> 
+{% endblock %}
+
+{% block content %}
+
+<div class="container-lg py-3">
+<h1>My Profile</h1>
+<p class="text-muted mb-0" style="font-size: 12px">Username:</p>
+<p>{{ user.username }}</p>
+<p class="text-muted mb-0" style="font-size: 12px">Email:</p>
+<p>{{ user.email }} </p>
+<p class="text-muted mb-0" style="font-size: 12px">Fund:</p>
+<p>{{ user.profile.fund }} </p>
+<p class="text-muted mb-0" style="font-size: 12px">Role:</p>
+<p>{{ user.profile.get_role_display }} </p>
+
+</div>
+
+{% endblock %}
