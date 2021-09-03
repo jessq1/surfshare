@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/b-index.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container-lg py-3">
+<section class="page-header">
+  <h1>All Boards</h1>
+</section>
+
+<section class="card-container">
+<div class="row">
+
+  {% for board in boards %}
+  <div class="col-md-4">
+    <div class="card py-3 mx-auto my-3">
+    {% if board.photo.url %}
+              <img 
+                src="{{board.photo.url}}" 
+                alt="A photo of {{board.name}}"
+                class="card-img-top"
+              >
+    {% else %}
+        <img src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_11.png' %}" class="card-img-top" alt="board">
+      {% endif %}
+        <div class="card-body text-start">
+        <h3 class="card-title">{{ board.name }}</h3>
+        <p>Length: {{ board.length }}ft</p>
+        <p>Type: {{ board.get_type_display }}</p>
+        <p>Color: {{ board.color }}</p>
+        <p>Price: ${{ board.price }}</p>
+        <p class="card-text">{{ board.description }}</p>
+      </div>
+      <a class='btn btn-outline-success' href="{% url 'boards_detail' board.id %}">Details
+      </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+</section>
+
+{% endblock %}

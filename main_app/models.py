@@ -39,7 +39,7 @@ class Board(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
-    return self.name
+    return f"{self.get_type_display()}"
   
   def get_absolute_url(self):
     return reverse('boards_detail', kwargs={'board_id': self.id})

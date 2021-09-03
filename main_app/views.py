@@ -53,7 +53,7 @@ def boards_detail(request, board_id):
 
 class BoardCreate(LoginRequiredMixin, CreateView):
   model = Board
-  fields = ['name', 'origin', 'description', 'age']
+  fields = ['name', 'length', 'description', 'type', 'color', 'price']
   success_url = '/boards/'
 
   def form_valid(self, form):
