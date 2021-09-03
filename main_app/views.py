@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Board, Photo, Profile
+from .models import Board, Photo, Reservation
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SignUpForm, UserForm, ProfileForm
 from django.views.generic import ListView, DetailView
