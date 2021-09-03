@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # from .models import Plant, Pot, Photo
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # from .forms import WaterForm
@@ -18,3 +18,17 @@ class Home(LoginView):
 
 def about(request):
   return render(request, 'about.html')
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('plants_index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'signup.html', context)

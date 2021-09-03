@@ -1,0 +1,22 @@
+
+#navbar{
+    background-color: #64b7c9;
+}
+
+.navbar-brand, .nav-link{
+    color: #f8fff3;
+}
+
+.navbar-brand:hover, .nav-link:hover{
+    color: #226c7c;
+}
+.navbar-toggler{
+    padding: 0;
+}
+.navbar-toggler-icon{
+    background-image: url('/static/images/SUMMER-HOLIDAY/SUMMER HOLIDAY_5.png');
+    border: #96deee solid 1px;
+    border-radius: 20%;
+    padding: 10px;
+}
+

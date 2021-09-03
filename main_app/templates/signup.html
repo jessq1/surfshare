@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form-style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-lg py-3">
+<div class="page-header">
+  <h1>Sign Up</h1>
+</div>
+{% if error_message %}
+  <p class="red-text">{{ error_message }}</p>
+{% endif %}
+<form action="" method="post" class="form-container" autocomplete="off">
+  {% csrf_token %}
+  <table class="m-3 table">
+    {{ form.as_table }}
+  </table>
+  <button type="submit" class="btn btn-outline-success my-3">Submit</button>
+</form>
+</div>
+
+{% endblock %}
