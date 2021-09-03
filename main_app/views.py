@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-# from .models import Plant, Pot, Photo
+from .models import Board
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SignUpForm
 from django.views.generic import ListView, DetailView
@@ -37,3 +37,34 @@ def signup(request):
   form = SignUpForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', {'form': form})
+
+@login_required
+def boards_index(request):
+    boards = Board.objects.all()
+    return render(request, 'boards/index.html', { 'boards': boards }) 
+
+@login_required
+def boards_detail(request, board_id):
+  board = Board.objects.get(id=board_id)
+#   pots_board_doesnt_have = Pot.objects.exclude(id__in = board.pots.all().values_list('id'))
+#   water_form = WaterForm()
+  return render(request, 'boards/detail.html', { 
+    'board': board, })
+
+class BoardCreate(LoginRequiredMixin, CreateView):
+  model = Board
+  fields = ['name', 'origin', 'description', 'age']
+  success_url = '/boards/'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user 
+    return super().form_valid(form)
+
+class BoardUpdate(LoginRequiredMixin, UpdateView):
+  model = Board
+  # Let's disallow the renaming of a board by excluding the name field!
+  fields = ['origin', 'description', 'age']
+
+class BoardDelete(LoginRequiredMixin, DeleteView):
+  model = Board
+  success_url = '/boards/'

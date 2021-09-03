@@ -10,6 +10,11 @@ ROLES = (
   ('R', 'Renter')
 )
 
+TYPES = (
+  ('H', 'Hard Top'),
+  ('S', 'Soft Top')
+)
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -21,3 +26,20 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()
+
+
+class Board(models.Model):
+  name = models.CharField(max_length=100)
+  length = models.CharField(max_length=100)
+  description = models.TextField(max_length=250)
+  type = models.CharField(max_length=1,choices=TYPES,default=TYPES[0][0])
+  color = models.CharField(max_length=20)
+  price = models.IntegerField()
+#   reservation = models.ManyToManyField(Reservation)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.name
+  
+  def get_absolute_url(self):
+    return reverse('boards_detail', kwargs={'board_id': self.id})
