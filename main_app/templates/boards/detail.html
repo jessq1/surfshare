@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="{% static 'css/b-detail.css' %}"
+/> 
+<script defer src="{% static 'js/board-detail.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-lg py-3">
+<div class="row">
+<div class="col">
+<section class="board-container">
+  <div class="board-img">
+  {% if board.photo.url %}
+      <img 
+        src="{{board.photo.url}}" 
+        alt="A photo of {{board.name}}"
+        class="board-img"
+      >
+    {% else %}
+    <img 
+      class="board-img"
+      src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_11.png' %}" 
+      alt="A skater boy board"
+    >
+    {% endif %}
+  </div>
+  <div class="board-details">
+    <h1>{{ board.name }}</h1>
+    <p>Length: {{ board.length }}ft</p>
+        <p>Type: {{ board.get_type_display }}</p>
+        <p>Color: {{ board.color }}</p>
+        <p>Price: ${{ board.price }}</p>
+    <p>{{ board.description }}</p>
+    <div class="board-actions">
+      <a href="{% url 'boards_update' board.id %}" class="btn btn-outline-success">Edit</a>
+      <a href="{% url 'boards_delete' board.id %}" class="btn btn-outline-danger">Delete</a>
+    </div>
+    <h5 class='my-3'>Change {{ board.name }}'s photo</h5>
+    <p id="file-name"></p>
+    <form 
+      action="{% url 'add_photo' board.id %}"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+      {% csrf_token %}
+      <label class="btn btn-outline-success">
+        Choose photo
+        <input type="file" name="photo-file" id="file-input">
+      </label>
+      <button type="submit" class="btn btn-outline-success">Upload Photo</button>
+    </form>
+  </div>
+  </section>
+    </div>
+
+  <div class="col my-4">
+  
+      </div>
+
+
+</section>
+</div>
+</div>
+
+{% endblock %}

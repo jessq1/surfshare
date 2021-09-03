@@ -43,3 +43,11 @@ class Board(models.Model):
   
   def get_absolute_url(self):
     return reverse('boards_detail', kwargs={'board_id': self.id})
+
+
+class Photo(models.Model):
+  url = models.CharField(max_length=250)
+  board = models.OneToOneField(Board, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"Photo for board_id: {self.board_id} @{self.url}"
