@@ -53,7 +53,6 @@ class Board(models.Model):
   type = models.CharField(max_length=1,choices=TYPES,default=TYPES[0][0])
   color = models.CharField(max_length=20)
   price = models.IntegerField()
-#   reservation = models.ManyToManyField(Reservation)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
