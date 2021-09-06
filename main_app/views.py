@@ -52,10 +52,11 @@ def boards_index(request):
 def boards_detail(request, board_id):
   board = Board.objects.get(id=board_id)
   calendar_week = Calendar_week()
+  current_reservation = Reservation.objects.filter(board=board)
 #   pots_board_doesnt_have = Pot.objects.exclude(id__in = board.pots.all().values_list('id'))
 #   water_form = WaterForm()
   return render(request, 'boards/detail.html', { 
-    'board': board, 'calendar_week': calendar_week, })
+    'board': board, 'calendar_week': calendar_week, 'current_reservation':current_reservation,})
 
 class BoardCreate(LoginRequiredMixin, CreateView):
   model = Board

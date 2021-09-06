@@ -1,7 +1,7 @@
 import datetime
 
 # current_date = datetime.date.today()
-week = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+# week = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 class Calendar_week():
     current_date = datetime.date.today()
@@ -14,7 +14,7 @@ class Calendar_week():
         dates = []
         for i in range(0,7):
             day = datetime.date.today() + datetime.timedelta(days=i)
-            dates.append(day.strftime("%a"))
+            dates.append(day.strftime("%a %d"))
         return dates
 
     def return_weekdates(current_date):
@@ -23,3 +23,10 @@ class Calendar_week():
             day = datetime.date.today() + datetime.timedelta(days=i)
             dates.append(day.strftime("%d"))
         return dates
+    
+    def start_day(current_date):
+        return current_date
+    
+    def end_day(current_date):
+        return current_date + datetime.timedelta(days=7)
+

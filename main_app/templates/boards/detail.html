@@ -65,14 +65,43 @@
   <h2>Current Reservations</h2>
   <p>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
   <p>{{calendar_week.week_day}} {{calendar_week.month}}  {{calendar_week.date}}</p>
+
+  <table class="table table-borderless">
+  <thead>
+  <tr>
+  <th scope="col">Times</th>
   {% for d in calendar_week.return_weekarr %}
-  <p class='d-inline mx-3'>{{d}}</p>
+  <th scope="col">{{d}}</th>
   {% endfor %}
-  <p></p>
-  {% for d in calendar_week.return_weekdates %}
-  <p class='d-inline mx-3'> /{{d}}/ </p>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th scope="row">5:00-6:45</th>
+    </tr>
+    <th scope="row">7:00-8:45</th>
+    </tr>
+    <th scope="row">9:00-10:45</th>
+    </tr>
+    <th scope="row">11:00-12:45</th>
+    </tr>
+    <th scope="row">13:00-14:45</th>
+    </tr>
+    <th scope="row">15:00-16:45</th>
+    </tr>
+    <th scope="row">17:00-18:45</th>
+    </tr>
+    <th scope="row">19:00-20:45</th>
+    </tr>
+    <th scope="row">21:00-22:45</th>
+    </tr>
+  {% for r in current_reservation %}
+    {% if r.date == calendar_week.start_day  %}
+    <p class='d-inline mx-3'> {{r}} </p>
+    {% endif %}
   {% endfor %}
 
+  </table>
       </div>
 
 
