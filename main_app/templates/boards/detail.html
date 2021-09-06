@@ -95,10 +95,9 @@
     </tr>
     <th scope="row">21:00-22:45</th>
     </tr>
-  {% for r in current_reservation %}
-    {% if r.date == calendar_week.start_day  %}
-    <p class='d-inline mx-3'> {{r}} </p>
-    {% endif %}
+  {% endfor %}
+    {% for r in reservation_check.reservations %}
+        <p class='d-inline mx-3'> {{r.time}} </p>
   {% endfor %}
 
   </table>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Board, Photo, Reservation
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SignUpForm, UserForm, ProfileForm
-from .time import Calendar_week
+from .time import Calendar_week, Reservation_check
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login, authenticate
@@ -52,11 +52,13 @@ def boards_index(request):
 def boards_detail(request, board_id):
   board = Board.objects.get(id=board_id)
   calendar_week = Calendar_week()
-  current_reservation = Reservation.objects.filter(board=board)
+  reservation_check = Reservation_check()
+  board_reservation = Reservation.objects.filter(board=board)
 #   pots_board_doesnt_have = Pot.objects.exclude(id__in = board.pots.all().values_list('id'))
 #   water_form = WaterForm()
   return render(request, 'boards/detail.html', { 
-    'board': board, 'calendar_week': calendar_week, 'current_reservation':current_reservation,})
+    'board': board, 'calendar_week': calendar_week, 'board_reservation':board_reservation,
+    'reservation_check': reservation_check })
 
 class BoardCreate(LoginRequiredMixin, CreateView):
   model = Board

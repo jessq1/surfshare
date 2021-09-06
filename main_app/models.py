@@ -61,6 +61,10 @@ class Board(models.Model):
   def get_absolute_url(self):
     return reverse('boards_detail', kwargs={'board_id': self.id})
 
+  def get_reservation_table(self):
+    
+    pass
+
 class Reservation(models.Model):
   date = models.DateField()
   time = models.CharField(max_length=2,choices=TIMES,default=TIMES[0][0])
@@ -72,6 +76,7 @@ class Reservation(models.Model):
     return f"{self.get_time_display()} on {self.date}"
   class Meta:
     ordering = ['-date']
+  
 
 class Photo(models.Model):
   url = models.CharField(max_length=250)
