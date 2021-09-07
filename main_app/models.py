@@ -74,7 +74,10 @@ class Board(models.Model):
     for time in TIMES:
       tb_row = [time[1]]
       for i in range(0,7):
-        tb_row.append('check')
+        if self.reservation_set.filter(date=(date.today()+timedelta(days=i)), time=time[0]).exists():
+          tb_row.append(self.reservation_set.get(date=(date.today()+timedelta(days=i)), time=time[0]))
+        else:
+          tb_row.append(' ')
       table.append(tb_row)
     return table
 

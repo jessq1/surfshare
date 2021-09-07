@@ -108,6 +108,7 @@
   <th scope="col">Times</th>
   {% for d in calendar_week.return_weekarr %}
   <th scope="col">{{d}}</th>
+
   {% endfor %}
   </tr>
   </thead>
@@ -115,7 +116,14 @@
 {% for row in board.get_current_reservation_table %}
     </tr>
     {% for item in row %}
-    <td scope="row">{{item}}</td>
+        {% if item == ' ' %}
+    <td scope="row">{{item}} </td>
+        {% elif item.time %}
+    <td scope="row"><a  href="{% url 'reservations_detail' item.id %}">Reserved by {{item.user}} </a></td>
+        {% else %}
+    <th scope="row">{{item}}</th>
+        {% endif  %}
+
     {% endfor %}
     </tr>
   {% endfor %}
