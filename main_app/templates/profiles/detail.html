@@ -21,7 +21,18 @@
 <p>{{ user.profile.fund }} </p>
 <p class="text-muted mb-0" style="font-size: 12px">Role:</p>
 <p>{{ user.profile.get_role_display }} </p>
-
+<h3 class="text mb-1" >Upcoming Reservations:</h3>
+{% for r in user_current_reservations %}
+  <a  href="{% url 'reservations_detail' r.id %}">
+        <p class='d-block mx-3'> {{r}} </p>
+            </a>
+{% endfor %}
+<h3 class="text mb-1" >Past Reservations:</h3>
+{% for r in user_past_reservations %}
+  <a  href="{% url 'reservations_detail' r.id %}">
+        <p class='d-inline mx-3'> /{{r}} /</p>
+            </a>
+{% endfor %}
 </div>
 
 {% endblock %}

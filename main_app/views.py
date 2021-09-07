@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from datetime import date, timedelta
 import uuid
 import boto3
 
@@ -99,9 +100,12 @@ def add_photo(request, board_id):
 def profiles_detail(request):
   user_form = UserForm(instance=request.user)
   profile_form = ProfileForm(instance=request.user.profile)
+  user_reservations = Reservation.objects.filter(user_id=request.user.id)
+  user_current_reservations = Reservation.objects.filter(user_id=request.user.id, date__range=[date.today(),date.today()+timedelta(days=7)])
+  user_past_reservations = Reservation.objects.filter(user_id=request.user.id,date__lt=date.today() )
 
   return render(request, 'profiles/detail.html', { 
-    "user":request.user, "user_form":user_form, "profile_form":profile_form })
+    "user":request.user, "user_form":user_form, "profile_form":profile_form,'user_reservations':user_reservations, 'user_current_reservations':user_current_reservations, 'user_past_reservations':user_past_reservations, })
 
 @login_required
 def add_reservation(request, board_id):
@@ -117,6 +121,7 @@ def add_reservation(request, board_id):
 
 class ReservationDetail(LoginRequiredMixin, DetailView):
   model = Reservation
+  date = date.today()
 
 class ReservationDelete(LoginRequiredMixin, DeleteView):
   model = Reservation
