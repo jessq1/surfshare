@@ -95,12 +95,20 @@
     </tr>
     <th scope="row">21:00-22:45</th>
     </tr>
-  {% endfor %}
     {% for r in reservation_check.reservations %}
         <p class='d-inline mx-3'> {{r.time}} </p>
   {% endfor %}
-
   </table>
+  <h2>Add Reservations</h2>
+  <form
+      action="{% url 'add_reservation' board.id %}"
+      method="post" 
+      class="subsection-content"
+    >
+      {% csrf_token %}
+      {{ reservation_form.as_p }}
+      <button type="submit" class="btn btn-outline-secondary">Reserve</button>
+    </form>
       </div>
 
 

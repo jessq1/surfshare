@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Reservation
 
 ROLES = (
   ('O', 'Owner'),
@@ -24,3 +24,8 @@ class ProfileForm(forms.ModelForm):
 	class Meta: 
 		model = Profile
 		fields = ('role', 'fund')
+
+class ReservationForm(forms.ModelForm):
+  class Meta:
+    model = Reservation
+    fields = ['date', 'time']

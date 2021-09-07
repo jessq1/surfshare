@@ -11,5 +11,6 @@ urlpatterns = [
     path('boards/<int:pk>/update/', views.BoardUpdate.as_view(), name='boards_update'),
     path('boards/<int:pk>/delete/', views.BoardDelete.as_view(), name='boards_delete'),
     path('boards/<int:board_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('boards/<int:board_id>/add_reservation/', views.add_reservation, name='add_reservation'),
     path('profile/', views.profiles_detail, name='profiles_detail'),
 ]

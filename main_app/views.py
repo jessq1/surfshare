@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Board, Photo, Reservation
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import SignUpForm, UserForm, ProfileForm
+from .forms import SignUpForm, UserForm, ProfileForm, ReservationForm
 from .time import Calendar_week, Reservation_check
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
@@ -55,10 +55,10 @@ def boards_detail(request, board_id):
   reservation_check = Reservation_check()
   board_reservation = Reservation.objects.filter(board=board)
 #   pots_board_doesnt_have = Pot.objects.exclude(id__in = board.pots.all().values_list('id'))
-#   water_form = WaterForm()
+  reservation_form = ReservationForm()
   return render(request, 'boards/detail.html', { 
     'board': board, 'calendar_week': calendar_week, 'board_reservation':board_reservation,
-    'reservation_check': reservation_check })
+    'reservation_check': reservation_check, 'reservation_form':reservation_form, })
 
 class BoardCreate(LoginRequiredMixin, CreateView):
   model = Board
@@ -95,7 +95,6 @@ def add_photo(request, board_id):
       print('An error occurred uploading file to S3: %s' % err)
   return redirect('boards_detail', board_id=board_id)
 
-
 @login_required
 def profiles_detail(request):
   user_form = UserForm(instance=request.user)
@@ -103,3 +102,15 @@ def profiles_detail(request):
 
   return render(request, 'profiles/detail.html', { 
     "user":request.user, "user_form":user_form, "profile_form":profile_form })
+
+@login_required
+def add_reservation(request, board_id):
+  form = ReservationForm(request.POST)
+  current_user = request.user
+  if form.is_valid():
+    new_reservation = form.save(commit=False)
+    new_reservation.board_id = board_id
+    new_reservation.user_id = current_user.id
+    new_reservation.save()
+
+  return redirect('boards_detail', board_id=board_id)
