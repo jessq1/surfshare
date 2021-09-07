@@ -54,7 +54,7 @@ def boards_detail(request, board_id):
   calendar_week = Calendar_week()
   reservation_check = Reservation_check()
   board_reservation = Reservation.objects.filter(board=board)
-#   pots_board_doesnt_have = Pot.objects.exclude(id__in = board.pots.all().values_list('id'))
+#   pots_board_doesnt_have = Reservation.objects.exclude(id__in = board.pots.all().values_list('id'))
   reservation_form = ReservationForm()
   return render(request, 'boards/detail.html', { 
     'board': board, 'calendar_week': calendar_week, 'board_reservation':board_reservation,
@@ -114,3 +114,10 @@ def add_reservation(request, board_id):
     new_reservation.save()
 
   return redirect('boards_detail', board_id=board_id)
+
+class ReservationDetail(LoginRequiredMixin, DetailView):
+  model = Reservation
+
+class ReservationDelete(LoginRequiredMixin, DeleteView):
+  model = Reservation
+  success_url = '/profile/'

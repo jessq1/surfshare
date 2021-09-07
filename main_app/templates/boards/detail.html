@@ -32,7 +32,7 @@
     {% endif %}
   </div>
   <div class="board-details">
-    <h1>{{ board.name }}</h1>
+    <h1 style="color: {{ board.color }}">{{ board.name }}</h1>
     <p>Length: {{ board.length }}ft</p>
         <p>Type: {{ board.get_type_display }}</p>
         <p>Color: {{ board.color }}</p>
@@ -96,7 +96,9 @@
     <th scope="row">21:00-22:45</th>
     </tr>
   {% for r in board.get_board_current_reservations %}
+  <a  href="{% url 'reservations_detail' r.id %}">
         <p class='d-inline mx-3'> /{{r}} /</p>
+            </a>
   {% endfor %}
   </table>
   <h2>Add Reservations</h2>

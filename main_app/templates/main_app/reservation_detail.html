@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/reservation-detail.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+<div class="container-lg py-3"> 
+<div class="card" style="border-color: {{ reservation.color }}">
+  <div class="card-content">
+    <h2>Reservation: {{ reservation.time }} on {{ reservation.date }}</h2>
+    <p>By {{ reservation.user }} </p>
+  </div>
+</div>
+<a href="{% url 'reservations_delete' reservation.id %}" class="btn btn-outline-danger m-2">Delete</a>
+</div>
+
+{% endblock %}

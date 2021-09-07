@@ -16,7 +16,7 @@
 
   {% for board in boards %}
   <div class="col-md-4">
-    <div class="card py-3 mx-auto my-3">
+    <div class="card py-3 mx-auto my-3" style="border-color: {{ board.color }}">
     {% if board.photo.url %}
               <img 
                 src="{{board.photo.url}}" 
@@ -34,7 +34,7 @@
         <p>Price: ${{ board.price }}</p>
         <p class="card-text">{{ board.description }}</p>
       </div>
-      <a class='btn btn-outline-success' href="{% url 'boards_detail' board.id %}">Details
+      <a class='btn btn-outline-success' href="{% url 'boards_detail' board.id %}" style="border-color: {{ board.color }}; color: {{ board.color }};">Details
       </a>
       </div>
     </div>
