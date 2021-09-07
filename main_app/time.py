@@ -1,9 +1,6 @@
 import datetime
 from .models import Reservation
 
-# current_date = datetime.date.today()
-# week = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
 class Calendar_week():
     current_date = datetime.date.today()
     yr, wk_num, wk_day = current_date.isocalendar()

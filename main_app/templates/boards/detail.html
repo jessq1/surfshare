@@ -95,12 +95,36 @@
     </tr>
     <th scope="row">21:00-22:45</th>
     </tr>
+  </table>
   {% for r in board.get_board_current_reservations %}
   <a  href="{% url 'reservations_detail' r.id %}">
         <p class='d-inline mx-3'> /{{r}} /</p>
             </a>
   {% endfor %}
+  <h2>Tests</h2>
+<table class="table table-borderless">
+  <thead>
+  <tr>
+  <th scope="col">Times</th>
+  {% for d in calendar_week.return_weekarr %}
+  <th scope="col">{{d}}</th>
+  {% endfor %}
+  </tr>
+  </thead>
+  <tbody>
+{% for row in board.get_current_reservation_table %}
+    </tr>
+    {% for item in row %}
+    <td scope="row">{{item}}</td>
+    {% endfor %}
+    </tr>
+  {% endfor %}
+
+  </tbody>
   </table>
+
+
+
   <h2>Add Reservations</h2>
   <form
       action="{% url 'add_reservation' board.id %}"

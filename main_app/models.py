@@ -69,6 +69,15 @@ class Board(models.Model):
   def get_all_board_reservations(self):
     return self.reservation_set.all()
 
+  def get_current_reservation_table(self):
+    table=[]
+    for time in TIMES:
+      tb_row = [time[1]]
+      for i in range(0,7):
+        tb_row.append('check')
+      table.append(tb_row)
+    return table
+
 class Reservation(models.Model):
   date = models.DateField()
   time = models.CharField(max_length=2,choices=TIMES,default=TIMES[0][0])
