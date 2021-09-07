@@ -95,8 +95,8 @@
     </tr>
     <th scope="row">21:00-22:45</th>
     </tr>
-    {% for r in reservation_check.reservations %}
-        <p class='d-inline mx-3'> {{r.time}} </p>
+  {% for r in board.get_board_current_reservations %}
+        <p class='d-inline mx-3'> /{{r}} /</p>
   {% endfor %}
   </table>
   <h2>Add Reservations</h2>

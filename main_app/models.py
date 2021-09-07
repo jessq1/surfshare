@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
+from datetime import date, timedelta
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -61,9 +61,13 @@ class Board(models.Model):
   def get_absolute_url(self):
     return reverse('boards_detail', kwargs={'board_id': self.id})
 
-  def get_reservation_table(self):
-    
-    pass
+  def get_board_current_reservations(self):
+    start_day = date.today()
+    end_day = start_day + timedelta(days=7)
+    return self.reservation_set.filter(date__range=[start_day, end_day])
+  
+  def get_all_board_reservations(self):
+    return self.reservation_set.all()
 
 class Reservation(models.Model):
   date = models.DateField()
@@ -75,7 +79,7 @@ class Reservation(models.Model):
   def __str__(self):
     return f"{self.get_time_display()} on {self.date}"
   class Meta:
-    ordering = ['-date']
+    ordering = ['date']
   
 
 class Photo(models.Model):
