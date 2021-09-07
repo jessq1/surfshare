@@ -55,11 +55,12 @@ def boards_detail(request, board_id):
   calendar_week = Calendar_week()
   reservation_check = Reservation_check()
   board_reservation = Reservation.objects.filter(board=board)
+  user = request.user
 #   pots_board_doesnt_have = Reservation.objects.exclude(id__in = board.pots.all().values_list('id'))
   reservation_form = ReservationForm()
   return render(request, 'boards/detail.html', { 
     'board': board, 'calendar_week': calendar_week, 'board_reservation':board_reservation,
-    'reservation_check': reservation_check, 'reservation_form':reservation_form, })
+    'reservation_check': reservation_check, 'reservation_form':reservation_form, 'user':user })
 
 class BoardCreate(LoginRequiredMixin, CreateView):
   model = Board
@@ -100,12 +101,12 @@ def add_photo(request, board_id):
 def profiles_detail(request):
   user_form = UserForm(instance=request.user)
   profile_form = ProfileForm(instance=request.user.profile)
-  user_reservations = Reservation.objects.filter(user_id=request.user.id)
+  calendar_week = Calendar_week()
   user_current_reservations = Reservation.objects.filter(user_id=request.user.id, date__range=[date.today(),date.today()+timedelta(days=7)])
   user_past_reservations = Reservation.objects.filter(user_id=request.user.id,date__lt=date.today() )
 
   return render(request, 'profiles/detail.html', { 
-    "user":request.user, "user_form":user_form, "profile_form":profile_form,'user_reservations':user_reservations, 'user_current_reservations':user_current_reservations, 'user_past_reservations':user_past_reservations, })
+    "user":request.user, "user_form":user_form, "profile_form":profile_form,'calendar_week':calendar_week,  'user_current_reservations':user_current_reservations, 'user_past_reservations':user_past_reservations, })
 
 @login_required
 def add_reservation(request, board_id):

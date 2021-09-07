@@ -65,49 +65,12 @@
   <h2>Current Reservations</h2>
   <p>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
   <p>{{calendar_week.week_day}} {{calendar_week.month}}  {{calendar_week.date}}</p>
-
-  <table class="table table-borderless">
+<table class="table table-sm table-bordered table-hover">
   <thead>
   <tr>
   <th scope="col">Times</th>
   {% for d in calendar_week.return_weekarr %}
-  <th scope="col">{{d}}</th>
-  {% endfor %}
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-    <th scope="row">5:00-6:45</th>
-    </tr>
-    <th scope="row">7:00-8:45</th>
-    </tr>
-    <th scope="row">9:00-10:45</th>
-    </tr>
-    <th scope="row">11:00-12:45</th>
-    </tr>
-    <th scope="row">13:00-14:45</th>
-    </tr>
-    <th scope="row">15:00-16:45</th>
-    </tr>
-    <th scope="row">17:00-18:45</th>
-    </tr>
-    <th scope="row">19:00-20:45</th>
-    </tr>
-    <th scope="row">21:00-22:45</th>
-    </tr>
-  </table>
-  {% for r in board.get_board_current_reservations %}
-  <a  href="{% url 'reservations_detail' r.id %}">
-        <p class='d-inline mx-3'> /{{r}} /</p>
-            </a>
-  {% endfor %}
-  <h2>Tests</h2>
-<table class="table table-borderless">
-  <thead>
-  <tr>
-  <th scope="col">Times</th>
-  {% for d in calendar_week.return_weekarr %}
-  <th scope="col">{{d}}</th>
+  <th scope="col" >{{d}}</th>
 
   {% endfor %}
   </tr>
@@ -117,11 +80,13 @@
     </tr>
     {% for item in row %}
         {% if item == ' ' %}
-    <td scope="row">{{item}} </td>
+    <td style="width: 6vw">{{item}} </td>
+        {% elif item.time and item.user != user %}
+    <td style="width: 6vw">Reserved by {{item.user}} </td>
         {% elif item.time %}
-    <td scope="row"><a  href="{% url 'reservations_detail' item.id %}">Reserved by {{item.user}} </a></td>
+    <td style="width: 6vw"><a  href="{% url 'reservations_detail' item.id %}">Reserved by {{item.user}} </a></td>
         {% else %}
-    <th scope="row">{{item}}</th>
+    <th scope="row" style="width: 6vw">{{item}}</th>
         {% endif  %}
 
     {% endfor %}

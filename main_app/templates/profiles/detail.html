@@ -12,6 +12,8 @@
 {% block content %}
 
 <div class="container-lg py-3">
+<div class="row">
+<div class="col my-4">
 <h1>My Profile</h1>
 <p class="text-muted mb-0" style="font-size: 12px">Username:</p>
 <p>{{ user.username }}</p>
@@ -22,17 +24,65 @@
 <p class="text-muted mb-0" style="font-size: 12px">Role:</p>
 <p>{{ user.profile.get_role_display }} </p>
 <h3 class="text mb-1" >Upcoming Reservations:</h3>
-{% for r in user_current_reservations %}
-  <a  href="{% url 'reservations_detail' r.id %}">
-        <p class='d-block mx-3'> {{r}} </p>
-            </a>
-{% endfor %}
+{% if user_current_reservations.count %}
+  {% for r in user_current_reservations %}
+    <a  href="{% url 'reservations_detail' r.id %}">
+          <p class='d-block mx-3'> {{r}} </p>
+              </a>
+  {% endfor %}
+{% else %}
+  <p class=""> You doesn't have any current reservations </p>
+{% endif %}
 <h3 class="text mb-1" >Past Reservations:</h3>
-{% for r in user_past_reservations %}
-  <a  href="{% url 'reservations_detail' r.id %}">
-        <p class='d-inline mx-3'> /{{r}} /</p>
-            </a>
-{% endfor %}
+{% if user_past_reservations.count %}
+  {% for r in user_past_reservations %}
+    <a  href="{% url 'reservations_detail' r.id %}">
+          <p class='d-inline mx-3'> /{{r}} /</p>
+              </a>
+  {% endfor %}
+{% else %}
+  <p class=""> You doesn't have any previous reservations </p>
+{% endif %}
 </div>
+
+<div class="col my-4">
+  <h2>Current Reservations</h2>
+  <p>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
+  <p>{{calendar_week.week_day}} {{calendar_week.month}}  {{calendar_week.date}}</p>
+<table class="table table-sm table-bordered table-hover">
+  <thead>
+  <tr>
+  <th scope="col">Times</th>
+  {% for d in calendar_week.return_weekarr %}
+  <th scope="col" >{{d}}</th>
+
+  {% endfor %}
+  </tr>
+  </thead>
+  <tbody>
+
+{% for row in user.profile.get_current_reservation_table %}
+    </tr>
+    {% for item in row %}
+      {% if item == ' ' %}
+      <td style="width: 6vw">{{item}} </td>
+      {% elif item.time %}
+      <td style="width: 6vw"><a  href="{% url 'reservations_detail' item.id %}">Reserved {{item.board.name}} </a></td>
+      {% else %}
+      <th scope="row" style="width: 6vw">{{item}}</th>
+      {% endif  %}
+    {% endfor %}
+    </tr>
+  {% endfor %}
+
+  </tbody>
+  </table>
+
+</div>
+</div>
+
+</div>
+
+
 
 {% endblock %}

@@ -36,6 +36,18 @@ class Profile(models.Model):
     def __str__(self):
       return f"{self.get_role_display()}"
 
+    def get_current_reservation_table(self):
+      table=[]
+      for time in TIMES:
+        tb_row = [time[1]]
+        for i in range(0,7):
+          if self.user.reservation_set.filter(date=(date.today()+timedelta(days=i)), time=time[0]).exists():
+            tb_row.append(self.user.reservation_set.get(date=(date.today()+timedelta(days=i)), time=time[0]))
+          else:
+            tb_row.append(' ')
+        table.append(tb_row)
+      return table
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
