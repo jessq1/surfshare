@@ -36,6 +36,9 @@ class Profile(models.Model):
     def __str__(self):
       return f"{self.get_role_display()}"
 
+    def get_absolute_url(self):
+      return reverse('profiles_detail')
+
     def get_current_reservation_table(self):
       table=[]
       for time in TIMES:

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Board, Photo, Reservation
+from .models import Board, Photo, Profile, Reservation
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import SignUpForm, UserForm, ProfileForm, ReservationForm
 from .time import Calendar_week, Reservation_check
@@ -107,6 +107,10 @@ def profiles_detail(request):
 
   return render(request, 'profiles/detail.html', { 
     "user":request.user, "user_form":user_form, "profile_form":profile_form,'calendar_week':calendar_week,  'user_current_reservations':user_current_reservations, 'user_past_reservations':user_past_reservations, })
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['role','fund']
 
 @login_required
 def add_reservation(request, board_id):

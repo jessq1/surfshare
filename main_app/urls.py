@@ -13,7 +13,7 @@ urlpatterns = [
     path('boards/<int:board_id>/add_photo/', views.add_photo, name='add_photo'),
     path('boards/<int:board_id>/add_reservation/', views.add_reservation, name='add_reservation'),
     path('profile/', views.profiles_detail, name='profiles_detail'),
+    path('profile/<int:pk>/update/', views.ProfileUpdate.as_view(), name='profiles_update'),
     path('reservations/<int:pk>/', views.ReservationDetail.as_view(), name='reservations_detail'),
     path('reservations/<int:pk>/delete/', views.ReservationDelete.as_view(), name='reservations_delete'),
-
 ]
