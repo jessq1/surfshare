@@ -107,6 +107,7 @@ class Reservation(models.Model):
     return f"{self.get_time_display()} on {self.date}"
   class Meta:
     ordering = ['date']
+
   
 
 class Photo(models.Model):

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Board, Photo, Profile, Reservation
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import SignUpForm, UserForm, ProfileForm, ReservationForm
+from .forms import SignUpForm, UserForm, ProfileForm, AdjustFundForm, ReservationForm
 from .time import Calendar_week, Reservation_check
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
@@ -56,11 +56,11 @@ def boards_detail(request, board_id):
   reservation_check = Reservation_check()
   board_reservation = Reservation.objects.filter(board=board)
   user = request.user
-#   pots_board_doesnt_have = Reservation.objects.exclude(id__in = board.pots.all().values_list('id'))
   reservation_form = ReservationForm()
+  adjust_fund_Form = AdjustFundForm()
   return render(request, 'boards/detail.html', { 
     'board': board, 'calendar_week': calendar_week, 'board_reservation':board_reservation,
-    'reservation_check': reservation_check, 'reservation_form':reservation_form, 'user':user })
+    'reservation_check': reservation_check, 'reservation_form':reservation_form, 'user':user, 'adjust_fund_Form': adjust_fund_Form, })
 
 class BoardCreate(LoginRequiredMixin, CreateView):
   model = Board
@@ -116,11 +116,16 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
 def add_reservation(request, board_id):
   form = ReservationForm(request.POST)
   current_user = request.user
+  current_board = Board.objects.get(id=board_id)
   if form.is_valid():
     new_reservation = form.save(commit=False)
     new_reservation.board_id = board_id
     new_reservation.user_id = current_user.id
+    current_user.profile.fund = current_user.profile.fund - current_board.price
+    current_board.user.profile.fund += current_board.price
     new_reservation.save()
+    current_user.profile.save()
+    current_board.user.profile.save()
 
   return redirect('boards_detail', board_id=board_id)
 

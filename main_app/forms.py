@@ -25,6 +25,10 @@ class ProfileForm(forms.ModelForm):
 		  model = Profile
 		  fields = ('role', 'fund')
     
+class AdjustFundForm(forms.ModelForm):
+	class Meta: 
+		  model = Profile
+		  fields = ('fund',)
 
 class ReservationForm(forms.ModelForm):
   class Meta:
