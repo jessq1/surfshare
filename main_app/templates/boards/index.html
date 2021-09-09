@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block bg %}
-<body>
+<body class='seabg'>
 {% endblock %}
 
 {% block content %}
 <div class="bg">
 <div class="container-lg py-3">
 <section class="page-header">
-  <h1>All Boards</h1>
+  <h1 class='t-text'>All Boards</h1>
 </section>
 
 <section class="card-container">
@@ -21,26 +21,32 @@
 
   {% for board in boards %}
   <div class="col-md-4">
-    <div class="card py-3 mx-auto my-3" style="border-color: {{ board.color }}">
+    <div class="card py-3 mx-auto my-3">
+    <div class="card-head">
     {% if board.photo.url %}
               <img 
                 src="{{board.photo.url}}" 
                 alt="A photo of {{board.name}}"
                 class="card-img-top"
               >
+    {% elif board.type == 'S' %}
+        <img src="{% static 'images/surf/Surfb_L_3.png' %}" class="card-img-top" alt="board">
     {% else %}
-        <img src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_11.png' %}" class="card-img-top" alt="board">
+        <img src="{% static 'images/surf/Surfb_S_2.png' %}" class="card-img-top" alt="board">
       {% endif %}
-        <div class="card-body text-start">
-        <h3 class="card-title">{{ board.name }}</h3>
-        <p>Length: {{ board.length }}ft</p>
-        <p>Type: {{ board.get_type_display }}</p>
-        <p>Color: {{ board.color }}</p>
-        <p>Price: ${{ board.price }}</p>
-        <p class="card-text">{{ board.description }}</p>
-      </div>
-      <a class='btn btn-outline-success' href="{% url 'boards_detail' board.id %}" style="border-color: {{ board.color }}; color: {{ board.color }};">Details
+        <div class="card-body text-center m-2">
+        <h3 class="t-text" style="color: {{ board.color }}">{{ board.name }}</h3>
+        <div class="hide m-3">
+          <p>Length: {{ board.length }}ft</p>
+          <p>Type: {{ board.get_type_display }}</p>
+          <p>Color: {{ board.color }}</p>
+          <p>Price: ${{ board.price }}</p>
+      <a class='btn btn-outline-info' href="{% url 'boards_detail' board.id %}" 
+      >Details
       </a>
+        </div>
+    </div>
+      </div>
       </div>
     </div>
   {% endfor %}

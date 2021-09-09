@@ -1,8 +1,27 @@
 .card{
     width:320px;
     align-items: center;
+    background-color: rgb(225, 225, 225,.1);
 }
 
 .card-img-top{
     width:300px;
+}
+
+.t-text{
+    color:white
+}
+
+.hide{
+    display:none;
+}
+
+.card-head:hover .hide {
+    display: block;
+
+}
+.card-body{
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 20px;
+    border:#30426c 1px solid;
 }

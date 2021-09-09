@@ -65,16 +65,21 @@
 
 body{
     background-size:cover;
-    background-color: #64b7c9;
+    background-color: #55afc1;
 }
 
 .bg{
-    background-color: white;
+    /* background-color: rgb(225, 225, 225,.5); */
 }
 
 .beachbg{
     background-image: url("/static/images/beach/bg.jpg");
     background-size:cover;
+}
+.seabg{
+    background-image: url("/static/images/beach/sea_bg.jpg");
+    background-size:cover;
+    background-attachment: fixed;
 }
 
 .btn-outline-info{
@@ -99,6 +104,10 @@ body{
 @media only screen and (max-width: 992px) {
     .beachbg {
         background-image: url("/static/images/beach/bg.jpg");
+        background-size:initial;
+    }
+    .seabg{
+        background-image: url("/static/images/beach/sea_bg.jpg");
         background-size:initial;
     }
     }
