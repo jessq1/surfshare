@@ -1,15 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block bg %}
-<body>
+<body class="beachbg">
 {% endblock %}
 
 {% block content %}
-<div class="container-lg py-3">
-<h1>About the Surf Share</h1>
+<div class="container py-3 page-bg">
+<div class="row m-3">
+<h1 class='t-text'>About Surf Share</h1>
+<hr>
+<div class="col-md m-3">
+<h5 class='t-text'>A Surf Board Sharing System that provide economic solutions for both board owners and renters.</h5>
 <p>
-  .....
+  Surf Board rental typically cost $25 for half a day or $40 per-day. While Board storage near the beach usually cost $80 per month. It is a great expanse for surfing enthusiasts. SurfShare provides a platform to share this expanse between board owner and renter. To enter the Board Share System, every user pays a relatively low monthly membership fee ($30). In exchange, a board renter will pay a much lower rental fee each time. 80% of this rental fee will go to the board owner. 
  </p>
+ </div>
+<div class="col-md m-3">
+  <div class="d-flex justify-content-center" style="height:65vh">
+    <img 
+          src="{% static 'images/beach/marcy_day_surf_check.GIF' %}" 
+          alt="The Surf Share Logo"
+          style="height:65vh"
+          class="m-auto"
+        >
+  </div>
+    <p class='text-end text-muted'>@Illustration by Marcy Day</p>
+ </div>
+
+ </div>
 </div>
 
 {% endblock %}

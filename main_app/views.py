@@ -122,7 +122,7 @@ def add_reservation(request, board_id):
     new_reservation.board_id = board_id
     new_reservation.user_id = current_user.id
     current_user.profile.fund = current_user.profile.fund - current_board.price
-    current_board.user.profile.fund += current_board.price
+    current_board.user.profile.fund += current_board.price*.8
     new_reservation.save()
     current_user.profile.save()
     current_board.user.profile.save()
