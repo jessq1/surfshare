@@ -1,15 +1,36 @@
 
 #navbar{
-    background-color: #64b7c9;
+    background-color: transparent;
 }
 
 .navbar-brand, .nav-link{
     color: #f8fff3;
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 18px;
+    transition: transform .1s ease-in-out;
+}
+.navbar-brand{
+    font-size: 25px;
+}
+
+.outlined-link{
+    border: white 1px solid;
+    border-radius: 10px;
+    font-size: 17px;
 }
 
 .navbar-brand:hover, .nav-link:hover{
-    color: #226c7c;
+    color: #f8fff3;
+    transform: rotate(3deg);
 }
+
+.outlined-link:hover{
+    border: white 1px solid;
+    border-radius: 10px;
+    color: #96deee;
+    background-color: white;
+}
+
 .navbar-toggler{
     padding: 0;
 }
@@ -20,3 +41,11 @@
     padding: 10px;
 }
 
+body{
+    background-image: url("/static/images/beach/bg.jpg");
+    background-size:cover;
+}
+
+.bg{
+    background-color: white;
+}

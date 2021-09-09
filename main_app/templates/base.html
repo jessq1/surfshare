@@ -13,6 +13,11 @@
   >
   <title>Surf Share</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="{% static 'css/base-style.css' %}">
   {% block head %}
   {% endblock %}
@@ -25,7 +30,7 @@
         <img 
           src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_1.png' %}" 
           alt="The Surf Share Logo"
-          width="50" 
+          width="30" 
           class="d-inline-block align-text-top"
         >
       </a>
@@ -42,11 +47,11 @@
           {% endif %}
           <li><a class='nav-link' href="{% url 'about' %}">About</a></li>
           <li><a class='nav-link' href="{% url 'profiles_detail' %}">My Profile</a></li>
-          <li><a class='nav-link' href="{% url 'logout' %}">Log out</a></li>
+          <li><a class='nav-link outlined-link' href="{% url 'logout' %}">Log out</a></li>
         {% else %}
           <li><a class='nav-link' href="{% url 'about' %}">About</a></li>
           <li><a class='nav-link' href="{% url 'home' %}">Login</a></li>
-          <li><a class='nav-link' href="{% url 'signup' %}">Sign Up</a></li>
+          <li><a class='nav-link outlined-link' href="{% url 'signup' %}">Sign Up</a></li>
         {% endif %}
       </ul>
       </div>
