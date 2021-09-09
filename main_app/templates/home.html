@@ -5,6 +5,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/home-style.css' %}"/>
 {% endblock %}
 
+{% block bg %}
+<body class="beachbg">
+{% endblock %}
+
+
 {% block content %}
 <div class="row">
   {% if not user.is_authenticated %}

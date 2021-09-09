@@ -42,10 +42,15 @@
 }
 
 body{
-    background-image: url("/static/images/beach/bg.jpg");
     background-size:cover;
+    background-color: #64b7c9;
 }
 
 .bg{
     background-color: white;
+}
+
+.beachbg{
+    background-image: url("/static/images/beach/bg.jpg");
+    background-size:cover;
 }
