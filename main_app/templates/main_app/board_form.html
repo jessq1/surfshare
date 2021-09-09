@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block bg %}
-<body>
+<body class='seabg'>
 {% endblock %}
 
 {% block content %}
@@ -14,18 +14,18 @@
 <div class="container-lg py-3">
 <div class="page-header">
 {% if object %}
-    <h1>Edit {{object.name}}</h1>
+    <h1 class='t-text d-inline'>Edit {{object.name}}</h1>
   {% else %}
-  <h1>Add a Board</h1>
+  <h1 class='t-text d-inline'>Add a Board</h1>
   {% endif %}
-  <img src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_1.png' %}" alt="Summer" class='img-wrapper'/>
+  <img src="{% static 'images/surf/Surfb_L_3.png' %}" alt="board" class='img-wrapper d-inline'/>
 </div>
 <form action="" method="post" class="form-container">
   {% csrf_token %}
   <table class='table'>
     {{ form.as_table }}
   </table>
-  <button type="submit" class="btn btn-outline-secondary m-2">Submit</button>
+  <button type="submit" class="btn btn-outline-info m-2">Submit</button>
 </form>
 </div>
 

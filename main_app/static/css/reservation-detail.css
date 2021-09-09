@@ -1,0 +1,14 @@
+.card{
+    width:50vw;
+    align-items: center;
+    background-color: rgb(225, 225, 225,.3);
+    margin:auto;
+    padding: 15px;
+}
+
+.img-wrapper{
+    height:55vh;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+}

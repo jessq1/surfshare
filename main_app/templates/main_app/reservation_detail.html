@@ -10,18 +10,21 @@
 {% endblock %}
 
 {% block bg %}
-<body>
+<body class='seabg'>
 {% endblock %}
 
 {% block content %}
 <div class="container-lg py-3"> 
 <div class="card" style="border-color: {{ reservation.color }}">
   <div class="card-content">
-    <h2>Reservation: {{ reservation.time }} on {{ reservation.date }}</h2>
-    <p>By {{ reservation.user }} </p>
+    <h2 class='t-text' >Reservation: </h2>
+    <h2 class='t-text' > {{ reservation.get_time_display }} on {{ reservation.date }}</h2>
+    <p class="m-3">By {{ reservation.user }} </p>
+    <img src="{% static 'images/beach/ignant-art-quentinmonge-2.jpg' %}" class="img-wrapper" alt="board">
+
   </div>
-</div>
 <a href="{% url 'reservations_delete' reservation.id %}" class="btn btn-outline-danger m-2">Delete</a>
+</div>
 </div>
 
 {% endblock %}

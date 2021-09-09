@@ -6,23 +6,23 @@
 {% endblock %}
 
 {% block bg %}
-<body>
+<body class='seabg'>
 {% endblock %}
 
 {% block content %}
 
-<div class="container-lg py-3">
+<div class="container py-3">
 <div class="page-header">
-  <h1>Delete Board?</h1>
-  <img src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_1.png' %}" class="img-wrapper" alt="board">
+  <h1 class='t-text'>Delete Board?</h1>
+  <img src="{% static 'images/surf/Surfb_L_3.png' %}" class="img-wrapper-l" alt="board">
 </div>
-<h2>Are you sure you want to delete {{ object.name }}?</h2>
+<h3>Are you sure you want to delete {{ object.name }}?</h3>
 
 <form action="" method="POST" class="form">
   {% csrf_token %}
   <a 
     href="{% url 'boards_detail' board.id %}" 
-    class="btn btn-outline-secondary m-2"
+    class="btn btn-outline-info m-2"
   >
     Cancel
   </a>

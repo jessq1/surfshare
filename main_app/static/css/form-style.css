@@ -1,4 +1,9 @@
 .img-wrapper{
-    width:20vw;
+    height:9vw;
+    transform: rotate(20deg);
 }
 
+.img-wrapper-l{
+    height:20vw;
+    transform: rotate(20deg);
+}
