@@ -41,6 +41,10 @@
     padding: 10px;
 }
 
+.t-text{
+    font-family: 'Cabin Sketch', cursive;
+}
+
 body{
     background-size:cover;
     background-color: #64b7c9;
@@ -54,3 +58,21 @@ body{
     background-image: url("/static/images/beach/bg.jpg");
     background-size:cover;
 }
+
+.btn-outline-info{
+    color: #30426c;
+    border-color:#30426c;
+}
+
+.btn-outline-info:hover{
+    color: #dce2f0;
+    border-color:#dce2f0;
+    background-color: #30426c;
+}
+
+@media only screen and (max-width: 992px) {
+    .beachbg {
+        background-image: url("/static/images/beach/bg.jpg");
+        background-size:initial;
+    }
+    }

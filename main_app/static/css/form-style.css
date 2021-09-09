@@ -1,3 +1,14 @@
 .img-wrapper{
     width:20vw;
 }
+
+.page-bg{
+    background-color: rgb(225, 225, 225,.6);
+    padding: 15px;
+    border-radius: 20px;
+    border:white 1px solid
+}
+
+.t-text{
+    color: #30426c;
+}

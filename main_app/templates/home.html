@@ -13,27 +13,24 @@
 {% block content %}
 <div class="row">
   {% if not user.is_authenticated %}
-  <div class="h-80 col-md-4 position-relative">
+  <div class="h-80 position-relative">
   <section class="position-absolute top-50 start-50 translate-middle">
   <div class="d-flex m-auto">
   <form action="{% url 'home' %}" method="post" class="login">
-    <h1 class="my-4">Login</h1>
+    <h1 class="my-4 t-text text-center">Welcome!</h1>
     {% csrf_token %}
-    {{ form.as_p }}
+    <table class='table table-borderless'>
+    {{ form.as_table }}
+    </table>
     <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="btn btn-outline-success">Login</button>
+    <div class="d-grid d-flex justify-content-center">
+    <button type="submit" class="btn btn-outline-info my-3">Login</button>
+    </div>
   </form>
   </div>
   </section>
   </div>
-<div class="col-sm-auto col-md-8">
 {% endif %}
-  <div class="img-fluid position-relative">
-    {% comment %} <img src="{% static 'images/beach/bg.jpg' %}" alt="bg" class="img-fluid"/> {% endcomment %}
-  </div>
-  {% if not user.is_authenticated %}
-  </div>
-  {% endif %}
   </div>
 
 {% endblock %}
