@@ -10,15 +10,17 @@
 {% endblock %}
 
 {% block bg %}
-<body>
+<body class='beachbg'>
 {% endblock %}
 
 {% block content %}
 
-<div class="container-lg py-3">
+<div class="container py-3">
 <div class="row">
 <div class="col my-4">
-<h1>My Profile</h1>
+<div class="page-bg">
+<h1 class="t-text">My Profile</h1>
+<div class="mx-3">
 <p class="text-muted mb-0" style="font-size: 12px">Username:</p>
 <p>{{ user.username }}</p>
 <p class="text-muted mb-0" style="font-size: 12px">Email:</p>
@@ -53,32 +55,37 @@
 
 <p class="text-muted mb-0" style="font-size: 12px">Role:</p>
 <p>{{ user.profile.get_role_display }} </p>
-<h3 class="text mb-1" >Upcoming Reservations:</h3>
-{% if user_current_reservations.count %}
-  {% for r in user_current_reservations %}
-    <a  href="{% url 'reservations_detail' r.id %}">
-          <p class='d-block mx-3'> {{r}} </p>
-              </a>
-  {% endfor %}
-{% else %}
-  <p class=""> You doesn't have any current reservations </p>
-{% endif %}
-<h3 class="text mb-1" >Past Reservations:</h3>
-{% if user_past_reservations.count %}
-  {% for r in user_past_reservations %}
-    <a  href="{% url 'reservations_detail' r.id %}">
-          <p class='d-inline mx-3'> /{{r}} /</p>
-              </a>
-  {% endfor %}
-{% else %}
-  <p class=""> You doesn't have any previous reservations </p>
-{% endif %}
+</div>
 </div>
 
-<div class="col my-4">
-  <h2>Current Reservations</h2>
-  <p>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
-  <p>{{calendar_week.week_day}} {{calendar_week.month}}  {{calendar_week.date}}</p>
+<div class="page-bg my-3">
+<h3 class="t-text mb-1" >Upcoming Reservations:</h3>
+{% if user_current_reservations.count %}
+  {% for r in user_current_reservations %}
+    <a  href="{% url 'reservations_detail' r.id %}" class='d-block my-2 btn btn-outline-info'>
+           {{r}} 
+              </a>
+  {% endfor %}
+{% else %}
+  <p class="mx-2"> You doesn't have any current reservations </p>
+{% endif %}
+<h3 class="t-text mb-1" >Past Reservations:</h3>
+{% if user_past_reservations.count %}
+  {% for r in user_past_reservations %}
+    <a  href="{% url 'reservations_detail' r.id %}" class='d-block my-2 btn btn-outline-info'>
+          {{r}} 
+              </a>
+  {% endfor %}
+{% else %}
+  <p class="mx-2"> You doesn't have any previous reservations </p>
+{% endif %}
+</div>
+</div>
+
+<div class="col my-2">
+  <h2 class='text-center t-text'>Current Reservations</h2>
+  <p class='text-center mb-0 t-text'>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
+  <p class='text-center t-text'>{{calendar_week.week_day}}. {{calendar_week.month}}  {{calendar_week.date}}</p>
 <table class="table table-sm table-bordered table-hover">
   <thead>
   <tr>
@@ -95,11 +102,11 @@
     </tr>
     {% for item in row %}
       {% if item == ' ' %}
-      <td style="width: 6vw">{{item}} </td>
+      <td style="width: 95px">{{item}} </td>
       {% elif item.time %}
-      <td style="width: 6vw"><a  href="{% url 'reservations_detail' item.id %}">Reserved {{item.board.name}} </a></td>
+      <td style="width: 95px; background: #30426c;"><a  href="{% url 'reservations_detail' item.id %}" class='my-reservation'>Reserved {{item.board.name}} </a></td>
       {% else %}
-      <th scope="row" style="width: 6vw">{{item}}</th>
+      <th scope="row" style="width: 95px">{{item}}</th>
       {% endif  %}
     {% endfor %}
     </tr>

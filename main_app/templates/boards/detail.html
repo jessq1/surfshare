@@ -16,7 +16,7 @@
 
 {% block content %}
 
-<div class="container-lg py-3">
+<div class="container py-3">
 <div class="row">
 <div class="col">
 <section class="board-container">
@@ -86,13 +86,13 @@
     </tr>
     {% for item in row %}
         {% if item == ' ' %}
-    <td style="width: 6vw">{{item}} </td>
+    <td style="width: 95px">{{item}} </td>
         {% elif item.time and item.user != user %}
-    <td style="width: 6vw; background: #a8eaf3;">Reserved by {{item.user}} </td>
+    <td style="width: 95px; background: #a8eaf3;">Reserved by {{item.user}} </td>
         {% elif item.time %}
-    <td style="width: 6vw; background: #30426c;"><a  href="{% url 'reservations_detail' item.id %}" class='my-reservation' > Reserved by {{item.user}}</a></td>
+    <td style="width: 95px; background: #30426c;"><a  href="{% url 'reservations_detail' item.id %}" class='my-reservation' > Reserved by {{item.user}}</a></td>
         {% else %}
-    <th scope="row" style="width: 6vw">{{item}}</th>
+    <th scope="row" style="width: 95px">{{item}}</th>
         {% endif  %}
 
     {% endfor %}
