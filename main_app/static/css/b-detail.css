@@ -1,6 +1,10 @@
 .board-img{
     width:20vw;
 }
+.board-img-rotate{
+  height:20vw;
+  transform: rotate(25deg);
+}
   
   .board-details h3 {
     margin: 16px 0 10px 0;
@@ -16,3 +20,9 @@
   #file-name {
     margin-bottom: 10px;
   }
+
+.table{
+  background-color: rgb(225, 225, 225,.1);
+  text-align: center;
+}
+

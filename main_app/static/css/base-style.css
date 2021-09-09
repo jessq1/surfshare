@@ -46,6 +46,15 @@
     color: #30426c;
 }
 
+.my-reservation{
+    text-decoration: none;
+    color: white;
+}
+.my-reservation:hover {
+    text-decoration: none;
+    color: #a2dde9;
+}
+
 .wc-text{
     font-family: 'Cabin Sketch', cursive;
     color:white; 
@@ -91,6 +100,18 @@ body{
     color: #dce2f0;
     border-color:#dce2f0;
     background-color: #30426c;
+}
+
+.btn-info{
+    background-color: #30426c;
+    border-color:#dce2f0;
+    color: #dce2f0;
+}
+
+.btn-info:hover, .btn-info:active{
+    color: #30426c;
+    border-color:#30426c;
+    background-color: white;
 }
 
 .page-bg{

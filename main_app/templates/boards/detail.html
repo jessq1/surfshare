@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block bg %}
-<body>
+<body class='seabg'>
 {% endblock %}
 
 {% block content %}
@@ -27,24 +27,26 @@
         alt="A photo of {{board.name}}"
         class="board-img"
       >
+    {% elif board.type == 'S' %}
+      <img src="{% static 'images/surf/Surfb_L_3.png' %}" class="board-img-rotate" alt="board">
     {% else %}
     <img 
-      class="board-img"
-      src="{% static 'images/SUMMER-HOLIDAY/SUMMER HOLIDAY_11.png' %}" 
-      alt="A skater boy board"
+      class="board-img-rotate"
+      src="{% static 'images/surf/Surfb_S_2.png' %}" 
+      alt="A board"
     >
     {% endif %}
   </div>
   <div class="board-details">
-    <h1 style="color: {{ board.color }}">{{ board.name }}</h1>
-    <p>Length: {{ board.length }}ft</p>
-        <p>Type: {{ board.get_type_display }}</p>
-        <p>Color: {{ board.color }}</p>
-        <p>Price: ${{ board.price }}</p>
-        <p>Owner: {{ board.user }}</p>
-    <p>{{ board.description }}</p>
+    <h1 class='t-text' style="color: {{ board.color }}">{{ board.name }}</h1>
+      <p class='mx-2'>Length: {{ board.length }}ft</p>
+      <p class='mx-2'>Type: {{ board.get_type_display }}</p>
+      <p class='mx-2'>Color: {{ board.color }}</p>
+      <p class='mx-2'>Price: ${{ board.price }}</p>
+      <p class='mx-2'>Owner: {{ board.user }}</p>
+      <p class='mx-2'>{{ board.description }}</p>
     <div class="board-actions">
-      <a href="{% url 'boards_update' board.id %}" class="btn btn-outline-success">Edit</a>
+      <a href="{% url 'boards_update' board.id %}" class="btn btn-outline-info">Edit</a>
       <a href="{% url 'boards_delete' board.id %}" class="btn btn-outline-danger">Delete</a>
     </div>
     <h5 class='my-3'>Change {{ board.name }}'s photo</h5>
@@ -55,20 +57,20 @@
       method="POST"
     >
       {% csrf_token %}
-      <label class="btn btn-outline-success">
+      <label class="btn btn-outline-info">
         Choose photo
         <input type="file" name="photo-file" id="file-input">
       </label>
-      <button type="submit" class="btn btn-outline-success">Upload Photo</button>
+      <button type="submit" class="btn btn-outline-info">Upload Photo</button>
     </form>
   </div>
   </section>
     </div>
 
   <div class="col my-4">
-  <h2>Current Reservations</h2>
-  <p>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
-  <p>{{calendar_week.week_day}} {{calendar_week.month}}  {{calendar_week.date}}</p>
+  <h2 class='text-center t-text' >Current Reservations</h2>
+  <p class='text-center mb-0 t-text'>Week {{calendar_week.wk_num}} of {{calendar_week.yr}}</p>
+  <p class='text-center t-text'>{{calendar_week.week_day}}. {{calendar_week.month}}  {{calendar_week.date}}</p>
 <table class="table table-sm table-bordered table-hover">
   <thead>
   <tr>
@@ -86,9 +88,9 @@
         {% if item == ' ' %}
     <td style="width: 6vw">{{item}} </td>
         {% elif item.time and item.user != user %}
-    <td style="width: 6vw">Reserved by {{item.user}} </td>
+    <td style="width: 6vw; background: #a8eaf3;">Reserved by {{item.user}} </td>
         {% elif item.time %}
-    <td style="width: 6vw"><a  href="{% url 'reservations_detail' item.id %}">Reserved by {{item.user}} </a></td>
+    <td style="width: 6vw; background: #30426c;"><a  href="{% url 'reservations_detail' item.id %}" class='my-reservation' > Reserved by {{item.user}}</a></td>
         {% else %}
     <th scope="row" style="width: 6vw">{{item}}</th>
         {% endif  %}
@@ -100,19 +102,36 @@
   </tbody>
   </table>
 
+<button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addReservModal">
+  + Reserve {{board.name}}
+</button>
 
-
-  <h2>Add Reservations</h2>
-  <form
+<div class="modal fade" id="addReservModal"  data-bs-keyboard="true" tabindex="-1" aria-labelledby="addFundModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Reservation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form
       action="{% url 'add_reservation' board.id %}"
       method="post" 
-      class="subsection-content"
+      class="form-container"
     >
-      {% csrf_token %}
-      {{ reservation_form.as_p }}
-      <button type="submit" class="btn btn-outline-secondary">Reserve</button>
-    </form>
+      <div class="modal-body">
+        {% csrf_token %}
+        <table class='table table-borderless'>
+        {{ reservation_form.as_table }}
+        </table>
       </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-info m-2">Submit</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 </section>
