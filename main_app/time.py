@@ -28,13 +28,3 @@ class Calendar_week():
     def end_day(current_date):
         return current_date + datetime.timedelta(days=7)
 
-class Reservation_check():
-    current_date = datetime.date.today()
-    reservations = Reservation.objects.filter(date=current_date)
-
-    def reservations_on_day(reservations):
-        result = [False, False, False, False, False, False, False, False, False]
-        timeslot = []
-        for r in reservations:
-            timeslot.append(r.time)
-        return timeslot
