@@ -35,10 +35,9 @@
     padding: 0;
 }
 .navbar-toggler-icon{
-    background-image: url('/static/images/SUMMER-HOLIDAY/SUMMER HOLIDAY_5.png');
-    border: #96deee solid 1px;
+    background-image: url('/static/images/surf/menu.png');
+    border: white solid 1px;
     border-radius: 20%;
-    padding: 10px;
 }
 
 .t-text{

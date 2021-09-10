@@ -23,5 +23,5 @@
 .card-body{
     background-color: rgba(255, 255, 255, 0.75);
     border-radius: 20px;
-    border:#30426c 1px solid;
+    /* border:#30426c 1px solid; */
 }
