@@ -24,7 +24,8 @@ A full-stack Django App - Surf Share
    4. HTML
    5. CSS
    6. JavaScript
-   7. Procreate
+   7. Amazon Web Services S3
+   8. Procreate
    8. Figma
 4. __Next Steps:__
    1. Add review model and functionalities
